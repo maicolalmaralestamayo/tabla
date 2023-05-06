@@ -9,9 +9,11 @@ class Tabla extends Component
 {
     public $cabecera;
     public $datos;
+    public $filtros;
 
-    public function mount($cabecera, $dir){
+    public function mount($cabecera, $filtros, $dir){
         $this->cabecera = $cabecera;
+        $this->filtros = $filtros;
         $this->CargarDatos($dir);
     }
 

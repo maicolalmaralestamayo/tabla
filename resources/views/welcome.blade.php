@@ -10,6 +10,8 @@
     </head>
     <body>
         @livewire('tabla', ['cabecera' =>[ 'ID coordenada', 'ID vehículo', 'fecha y hora', 'latitud', 'longitud', 'estado', 'observaciones'],
+                            'filtros' => ['id_coordenada' => 'ID coordenada',
+                                          'id_vehiculo' => 'ID vehículo'],
                             'dir' => 'http://localhost/gps/public/api/coordenadas/1/all'])
         
         <script src="../resources/js/jquery.slim.min.js"></script>

@@ -1,8 +1,9 @@
 <div id="contendor_tabla" class="container-fluid d-flex flex-column">
   <div id="fil_de_filtros" class="d-flex flex-row justify-content-center aling-items-center flex-wrap p-1 mb-1">
-    <input class="form-control form-control-sm m-1 w-auto" type="text" placeholder='nombre del campo'>
-    <input class="form-control form-control-sm m-1 w-auto" type="text" placeholder='nombre del campo'>
-    <input class="form-control form-control-sm m-1 w-auto" type="text" placeholder='nombre del campo'>
+    @foreach ($filtros as $key_filtro => $filtro_item)
+      <input class="form-control form-control-sm m-1 w-auto" type="text" placeholder={{$filtro_item}}>
+    @endforeach
+    
     <button type="button" class="btn btn-primary btn-sm m-1">Buscar</button>
   </div>
   
@@ -52,6 +53,7 @@
             <td class="d-flex flex-row justify-content-center align-items-center p-1">
               <button type="button" class="btn btn-outline-success btn-sm m-1">detalles</button>
               <button type="button" class="btn btn-outline-warning btn-sm m-1">actualizar</button>
+              <button type="button" class="btn btn-outline-primary btn-sm m-1">editar</button>
               <button type="button" class="btn btn-outline-danger btn-sm m-1">eliminar</button>
             </td>
           </tr>  
