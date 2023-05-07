@@ -1,63 +1,51 @@
 <div id="contendor_tabla" class="container-fluid d-flex flex-column">
-  <div id="fil_de_filtros" class="d-flex flex-row justify-content-center aling-items-center flex-wrap p-1 mb-1">
+  <div id="filtros" class="d-flex flex-row justify-content-center aling-items-center flex-wrap p-1 mb-1">
     @foreach ($filtros as $key_filtro => $filtro_item)
-      <input class="form-control form-control-sm m-1 w-auto" type="text" placeholder={{$filtro_item}}>
+      <input class="form-control form-control-sm m-1 w-auto" type="text" placeholder="{{$filtro_item}}">
     @endforeach
     
     <button type="button" class="btn btn-primary btn-sm m-1">Buscar</button>
   </div>
-  
-  <div id="fila_de_botones" class="d-flex flex-row justify-content-center align-items-center p-1 mb-1">
-    <div id="paginador" class="row">
-        <div class="page-item disabled"><span class="page-link">primero</span></div>
-        <div class="page-item"><span class="page-link">anterior</span></div>
-        <div class="page-item page-link">1</div>
-        <div class="page-item page-link">2</div>
-        <div class="page-item page-link bg-primary text-white">3</div>
-        <div class="page-item page-link">4</div>
-        <div class="page-item page-link">5</div>
-        <div class="page-item page-link">...</div>
-        <div class="page-item page-link">6</div>
-        <div class="page-item page-link">7</div>
-        <div class="page-item page-link">8</div>
-        <div class="page-item page-link">9</div>
-        <div class="page-item page-link">10</div>
-        <div class="page-item page-link">siguiente</div>
-        <div class="page-item"><span class="page-link">último</span></div>
-    </div>
-  </div>
 
-  <table id="tabla" class="table table-borderless table-hover table-sm w-auto">
-    <thead class="bg-success  text-white">
+  <nav id="paginador">
+    <ul class="pagination justify-content-center">
+      @foreach ($datos['meta']['links'] as $datos_item)
+        @if ($loop->first)
+          <li wire:click="CargarDatos('{{$datos['links']['first']}}')" @class(['page-item', 'disabled' => !$datos['links']['prev']])><a class="page-link" href="#">primero</a></li>
+          <li wire:click="CargarDatos('{{$datos['links']['prev']}}')" @class(['page-item', 'disabled' => !$datos_item['url']])><a class="page-link" href="#">anterior</a></li>
+          @continue
+        @endif
+
+        @if ($loop->last)
+          <li wire:click="CargarDatos('{{$datos['links']['next']}}')" wire:click="CargarDatos({{$datos['links']['next']}})" @class(['page-item', 'disabled' => !$datos_item['url']])><a class="page-link" href="#">próximo</a></li>
+          <li wire:click="CargarDatos('{{$datos['links']['last']}}')" wire:click="CargarDatos({{$datos['links']['last']}})" @class(['page-item', 'disabled' => !$datos['links']['next']])><a class="page-link" href="#">último</a></li>
+          @continue
+        @endif
+
+        <li wire:click="CargarDatos('{{$datos_item['url']}}')" @class(['page-item', 'active' => $datos_item['active']])><a class="page-link" href="#">{{$datos_item['label']}}</a></li>
+      @endforeach
+    </ul>
+  </nav>
+
+  <table id="tabla" class="table table-borderless table-hover table-sm">
+    <thead class="bg-primary text-white">
       <tr>
-        @foreach ($cabecera as $cabecera_item)
-          <th scope="col">{{$cabecera_item}}</th>
+        @foreach ($cabecera as $key => $cabecera_item)
+          <th scope="col" width={{$cabecera_item}}>{{$key}}</th>
         @endforeach
 
-        <th scope="col" class="d-flex flex-row justify-content-end">
-          <button type="button" class="btn btn-primary btn-sm m-1">Actualizar</button>
-          <button type="button" class="btn btn-primary btn-sm m-1">Nuevo +</button>
+        <th scope="col" class="d-flex flex-row justify-content-end align-items-center" width="auto">
+          <button wire:click="CargarDatos('{{$ultima_dir}}')" type="button" class="btn btn-secondary btn-sm m-1">Recargar</button>
+          <button type="button" class="btn btn-secondary btn-sm m-1">Nuevo +</button>
         </th>
       </tr>
     </thead>
     <tbody>
-        @foreach ($datos['data'] as $datos_item)
-          <tr>
-            <td>{{$datos_item['id_coordenada']}}</td>
-            <td>{{$datos_item['id_vehiculo']}}</td>
-            <td>{{$datos_item['fechora']}}</td>
-            <td>{{$datos_item['lat']}}</td>
-            <td>{{$datos_item['long']}}</td>
-            <td>{{$datos_item['est']}}</td> 
-            <td>{{$datos_item['obs']}}</td>
-            <td class="d-flex flex-row justify-content-center align-items-center p-1">
-              <button type="button" class="btn btn-outline-success btn-sm m-1">detalles</button>
-              <button type="button" class="btn btn-outline-warning btn-sm m-1">actualizar</button>
-              <button type="button" class="btn btn-outline-primary btn-sm m-1">editar</button>
-              <button type="button" class="btn btn-outline-danger btn-sm m-1">eliminar</button>
-            </td>
-          </tr>  
-        @endforeach
+      @foreach ($datos['data'] as $datos_item)
+        @livewire('fila', ['datos' => $datos_item], key($datos_item['id_coordenada']))
+      @endforeach
     </tbody>
   </table>
+
+  @livewire('modal-tabla', key('modal-tabla'))  
 </div>

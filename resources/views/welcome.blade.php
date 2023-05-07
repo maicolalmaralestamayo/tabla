@@ -9,10 +9,19 @@
         @livewireStyles
     </head>
     <body>
-        @livewire('tabla', ['cabecera' =>[ 'ID coordenada', 'ID vehículo', 'fecha y hora', 'latitud', 'longitud', 'estado', 'observaciones'],
+        @livewire('tabla', ['cabecera' =>[  'ID coordenada' => '10%', 
+                                            'ID vehículo' => '10%', 
+                                            'fecha y hora' => '15%', 
+                                            'latitud' => '10%', 
+                                            'longitud' => '10%', 
+                                            'estado' => '5%', 
+                                            'observaciones' => '20%'],
+
                             'filtros' => ['id_coordenada' => 'ID coordenada',
-                                          'id_vehiculo' => 'ID vehículo'],
-                            'dir' => 'http://localhost/gps/public/api/coordenadas/1/all'])
+                                          'id_vehiculo' => 'ID vehículo',
+
+                                          'est' => 'estado'],
+                            'dir' => 'http://localhost/gps/public/api/coordenadas/1/all/pag/3'])
         
         <script src="../resources/js/jquery.slim.min.js"></script>
         <script src="../resources/js/bootstrap.bundle.min.js"></script>
