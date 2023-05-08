@@ -21,7 +21,7 @@
                                           'id_vehiculo' => 'ID vehículo',
 
                                           'est' => 'estado'],
-                            'dir' => 'http://localhost/gps/public/api/coordenadas/1/all/pag/3'])
+                            'dir' => 'http://localhost/prueba/public/api/coordenadas/1/all/pag/3'])
         
         <script src="../resources/js/jquery.slim.min.js"></script>
         <script src="../resources/js/bootstrap.bundle.min.js"></script>

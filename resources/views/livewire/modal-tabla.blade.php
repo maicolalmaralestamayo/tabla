@@ -10,7 +10,7 @@
                     <div class="form-group m-1">
                       <label for="formGroupExampleInput">ID coordenada</label>
                       
-                      <input disabled type="text" class="form-control form-control-sm" id="formGroupExampleInput" placeholder="ejemplo: 10" value={{$datos['id_coordenada']}}>
+                      <input disabled type="text" class="form-control form-control-sm" id="formGroupExampleInput" placeholder="ejemplo: 10" value=10>
                     </div>
 
                     <div class="form-group m-1">
